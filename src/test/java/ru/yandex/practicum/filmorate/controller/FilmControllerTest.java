@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FilmControllerTest {
     FilmController filmController = new FilmController();
+
     @Test
     void shouldAddFilm() {
         Film film1 = new Film();
