@@ -14,10 +14,10 @@ import java.util.HashMap;
 @RestController
 public class FilmController {
     HashMap<Integer, Film> films = new HashMap<>();
-    private final LocalDate birthdayOfMovie = LocalDate.of(1895, 12, 28);
-    int id = 0;
+    private static final LocalDate BIRTHDAY_OF_MOVIE_DATE = LocalDate.of(1895, 12, 28);
+    private int id = 0;
 
-    public int createID() {
+    private int createID() {
         return ++id;
     }
 
@@ -29,7 +29,7 @@ public class FilmController {
     @PostMapping("/films")
     public Film addFilm(@Valid @RequestBody Film film) {
         if (film.getName().isBlank() || film.getDescription().length() > 200 || film.getDuration() <= 0 ||
-                film.getReleaseDate().isBefore(birthdayOfMovie)) {
+                film.getReleaseDate().isBefore(BIRTHDAY_OF_MOVIE_DATE)) {
             throw new ValidationException("Неправильно введены данные");
         }
         film.setId(createID());
@@ -42,7 +42,7 @@ public class FilmController {
     @PutMapping("/films")
     public Film updateFilm(@Valid @RequestBody Film film) {
         if (film.getName().isBlank() || film.getDescription().length() > 200 || film.getDuration() <= 0 ||
-                film.getReleaseDate().isBefore(birthdayOfMovie)) {
+                film.getReleaseDate().isBefore(BIRTHDAY_OF_MOVIE_DATE)) {
             throw new ValidationException("Неправильно введены данные");
         }
 

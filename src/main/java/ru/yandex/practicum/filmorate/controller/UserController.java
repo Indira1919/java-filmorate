@@ -13,10 +13,10 @@ import java.util.HashMap;
 @Slf4j
 @RestController
 public class UserController {
-    int id = 0;
+    private int id = 0;
     HashMap<Integer, User> users = new HashMap<>();
 
-    public int createIdUser() {
+    private int createIdUser() {
         return ++id;
     }
 
