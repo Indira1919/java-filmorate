@@ -21,10 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    public UserController() {
-
-    }
-
     @GetMapping("/users")
     public Collection<User> getUsers() {
         return userService.userStorage.getUsers();

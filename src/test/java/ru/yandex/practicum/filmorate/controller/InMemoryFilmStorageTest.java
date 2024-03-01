@@ -3,13 +3,14 @@ package ru.yandex.practicum.filmorate.controller;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class FilmControllerTest {
-    FilmController filmController = new FilmController();
+public class InMemoryFilmStorageTest {
+    InMemoryFilmStorage inMemoryFilmStorage = new InMemoryFilmStorage();
 
     @Test
     void shouldAddFilm() {
@@ -40,10 +41,10 @@ public class FilmControllerTest {
         film4.setReleaseDate(LocalDate.of(2006, 6, 16));
 
 
-        assertThrows(ValidationException.class, () -> filmController.addFilm(film1));
-        assertThrows(ValidationException.class, () -> filmController.addFilm(film2));
-        assertThrows(ValidationException.class, () -> filmController.addFilm(film3));
-        assertThrows(ValidationException.class, () -> filmController.addFilm(film4));
+        assertThrows(ValidationException.class, () -> inMemoryFilmStorage.addFilm(film1));
+        assertThrows(ValidationException.class, () -> inMemoryFilmStorage.addFilm(film2));
+        assertThrows(ValidationException.class, () -> inMemoryFilmStorage.addFilm(film3));
+        assertThrows(ValidationException.class, () -> inMemoryFilmStorage.addFilm(film4));
 
     }
 }

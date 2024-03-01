@@ -3,13 +3,14 @@ package ru.yandex.practicum.filmorate.controller;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class UserControllerTest {
-    UserController userController = new UserController();
+public class InMemoryUserStorageTest {
+    InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
 
     @Test
     void shouldAddUser() {
@@ -29,9 +30,9 @@ public class UserControllerTest {
         user2.setBirthday(LocalDate.of(1996, 7, 16));
 
 
-        assertThrows(ValidationException.class, () -> userController.addUser(user));
-        assertThrows(ValidationException.class, () -> userController.addUser(user1));
-        assertThrows(ValidationException.class, () -> userController.addUser(user2));
+        assertThrows(ValidationException.class, () -> inMemoryUserStorage.addUser(user));
+        assertThrows(ValidationException.class, () -> inMemoryUserStorage.addUser(user1));
+        assertThrows(ValidationException.class, () -> inMemoryUserStorage.addUser(user2));
     }
 
 }
