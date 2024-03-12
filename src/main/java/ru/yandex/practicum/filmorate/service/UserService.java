@@ -43,8 +43,8 @@ public class UserService {
             throw new UserNotFoundException("Пользователь не найден");
         }
 
-        userStorage.getUser(id).getFriends().remove(friendId);
-        userStorage.getUser(friendId).getFriends().remove(id);
+        userStorage.getUser(id).removeFriendsBy(friendId);
+        userStorage.getUser(friendId).removeFriendsBy(id);
 
         userStorage.updateUser(userStorage.getUser(friendId));
         return userStorage.updateUser(userStorage.getUser(id));

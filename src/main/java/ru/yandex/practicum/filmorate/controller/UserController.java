@@ -65,9 +65,9 @@ public class UserController {
         return userAdd;
     }
 
-    @DeleteMapping("/users")
-    public User removeUser(@Valid @RequestBody User user) {
-        User userRemove = userService.userStorage.removeUser(user);
+    @DeleteMapping("/users/{id}")
+    public User removeUser(@PathVariable int id) {
+        User userRemove = userService.userStorage.removeUser(id);
         log.info("Данные обновлены: {}", userRemove);
 
         return userRemove;

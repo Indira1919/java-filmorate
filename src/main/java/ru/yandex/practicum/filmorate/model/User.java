@@ -20,4 +20,8 @@ public class User {
     @PastOrPresent
     private LocalDate birthday;
     private Set<Integer> friends = new HashSet<>();
+
+    public void removeFriendsBy(int userId) {
+        friends.remove(userId);
+    }
 }

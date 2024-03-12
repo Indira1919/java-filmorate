@@ -60,9 +60,9 @@ public class FilmController {
         return likeAdd;
     }
 
-    @DeleteMapping("/films")
-    public Film removeFilm(@Valid @RequestBody Film film) {
-        Film filmDelete = filmService.filmStorage.removeFilm(film);
+    @DeleteMapping("/films/{id}")
+    public Film removeFilm(@PathVariable int id) {
+        Film filmDelete = filmService.filmStorage.removeFilm(id);
         log.info("Фильм удалён: {}", filmDelete);
 
         return filmDelete;

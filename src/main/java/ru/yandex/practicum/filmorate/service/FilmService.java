@@ -43,7 +43,7 @@ public class FilmService {
         if (userStorage.getUser(userId) == null) {
             throw new UserNotFoundException("Пользователь не найден");
         }
-        filmStorage.getFilm(id).getLikes().remove(userId);
+        filmStorage.getFilm(id).removeLikeBy(userId);
         return filmStorage.updateFilm(filmStorage.getFilm(id));
     }
 

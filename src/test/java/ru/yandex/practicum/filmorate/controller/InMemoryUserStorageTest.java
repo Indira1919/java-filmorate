@@ -1,38 +1,37 @@
 package ru.yandex.practicum.filmorate.controller;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
 
 import java.time.LocalDate;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class InMemoryUserStorageTest {
     InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
 
-    @Test
-    void shouldAddUser() {
+    @ParameterizedTest
+    @MethodSource("provideArgsForAddUser")
+    void shouldAddUser(String email, String login, LocalDate birthday) {
         User user = new User();
-        user.setEmail("friend.ru");
-        user.setLogin("friend");
-        user.setBirthday(LocalDate.of(1996, 8, 19));
-
-        User user1 = new User();
-        user1.setEmail("test@yandex.ru");
-        user1.setLogin("test");
-        user1.setBirthday(LocalDate.of(2027, 8, 19));
-
-        User user2 = new User();
-        user2.setEmail("user@yandex.ru");
-        user2.setLogin("best user");
-        user2.setBirthday(LocalDate.of(1996, 7, 16));
-
+        user.setEmail(email);
+        user.setLogin(login);
+        user.setBirthday(birthday);
 
         assertThrows(ValidationException.class, () -> inMemoryUserStorage.addUser(user));
-        assertThrows(ValidationException.class, () -> inMemoryUserStorage.addUser(user1));
-        assertThrows(ValidationException.class, () -> inMemoryUserStorage.addUser(user2));
+    }
+
+    private static Stream<Arguments> provideArgsForAddUser() {
+        return Stream.of(
+                Arguments.of("friend.ru", "friend", LocalDate.of(1996, 8, 19)),
+                Arguments.of("test@yandex.ru", "test", LocalDate.of(2027, 8, 19)),
+                Arguments.of("user@yandex.ru", "best user", LocalDate.of(1996, 7, 16))
+        );
     }
 
 }
