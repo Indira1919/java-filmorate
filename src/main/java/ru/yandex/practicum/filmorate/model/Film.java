@@ -20,6 +20,8 @@ public class Film {
     @Positive
     private int duration;
     private Set<Integer> likes = new HashSet<>();
+    private Set<Integer> genres = new HashSet<>();
+    String rating;
 
     public void removeLikeBy(int userId) {
         likes.remove(userId);

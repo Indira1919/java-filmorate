@@ -6,8 +6,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class User {
@@ -19,7 +19,7 @@ public class User {
     private String name;
     @PastOrPresent
     private LocalDate birthday;
-    private Set<Integer> friends = new HashSet<>();
+    private Map<Integer, StatusFriends> friends = new HashMap<>();
 
     public void removeFriendsBy(int userId) {
         friends.remove(userId);
