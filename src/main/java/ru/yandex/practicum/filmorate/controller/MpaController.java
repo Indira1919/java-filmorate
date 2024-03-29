@@ -9,7 +9,6 @@ import ru.yandex.practicum.filmorate.model.Mpa;
 import ru.yandex.practicum.filmorate.service.MpaService;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @Slf4j
