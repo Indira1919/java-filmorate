@@ -5,15 +5,16 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
+import ru.yandex.practicum.filmorate.service.FilmService;
+
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class InMemoryFilmStorageTest {
-    InMemoryFilmStorage inMemoryFilmStorage = new InMemoryFilmStorage();
+public class FilmServiceTest {
+    FilmService filmService = new FilmService();
 
     @ParameterizedTest
     @MethodSource("provideArgsForAddFilm")
@@ -24,7 +25,7 @@ public class InMemoryFilmStorageTest {
         film.setDuration(duration);
         film.setReleaseDate(releaseDate);
 
-        assertThrows(ValidationException.class, () -> inMemoryFilmStorage.addFilm(film));
+        assertThrows(ValidationException.class, () -> filmService.addFilm(film));
     }
 
     private static Stream<Arguments> provideArgsForAddFilm() {

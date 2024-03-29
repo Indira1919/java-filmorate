@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable int id) {
-        return userService.userStorage.getUser(id);
+        return userService.getUserById(id);
     }
 
     @GetMapping("/users/{id}/friends")
@@ -43,7 +43,7 @@ public class UserController {
 
     @PostMapping("/users")
     public User addUser(@Valid @RequestBody User user) {
-        User userAdd = userService.userStorage.addUser(user);
+        User userAdd = userService.addUser(user);
         log.info("Сохраненный пользователь: {}", user);
 
         return userAdd;
@@ -51,33 +51,28 @@ public class UserController {
 
     @PutMapping("/users")
     public User updateUser(@Valid @RequestBody User user) {
-        User userUpdate = userService.userStorage.updateUser(user);
+        User userUpdate = userService.updateUser(user);
         log.info("Данные обновлены: {}", user);
 
         return userUpdate;
     }
 
     @PutMapping("/users/{id}/friends/{friendId}")
-    public User addFriend(@PathVariable int id, @PathVariable int friendId) {
-        User userAdd = userService.addFriend(id, friendId);
-        log.info("Пользователь добавлен: {}", userAdd);
-
-        return userAdd;
+    public void addFriend(@PathVariable int id, @PathVariable int friendId) {
+        userService.addFriend(id, friendId);
+        log.info("Пользователь добавлен: {}", friendId);
     }
 
     @DeleteMapping("/users/{id}")
-    public User removeUser(@PathVariable int id) {
-        User userRemove = userService.userStorage.removeUser(id);
-        log.info("Данные обновлены: {}", userRemove);
+    public void removeUser(@PathVariable int id) {
+        userService.removeUser(id);
+        log.info("Пользователь с Id {} удален", id);
 
-        return userRemove;
     }
 
     @DeleteMapping("/users/{id}/friends/{friendId}")
-    public User removeFriend(@PathVariable int id, @PathVariable int friendId) {
-        User friendRemove = userService.removeFriend(id, friendId);
-        log.info("Пользователь удален: {}", friendRemove);
-
-        return friendRemove;
+    public void removeFriend(@PathVariable int id, @PathVariable int friendId) {
+        userService.removeFriend(id, friendId);
+        log.info("Пользователь удален: {}", friendId);
     }
 }

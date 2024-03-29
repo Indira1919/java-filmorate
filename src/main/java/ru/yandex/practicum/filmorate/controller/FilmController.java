@@ -28,7 +28,7 @@ public class FilmController {
 
     @GetMapping("/films/{id}")
     public Film getFilm(@PathVariable int id) {
-        return filmService.filmStorage.getFilm(id);
+        return filmService.getFilm(id);
     }
 
     @GetMapping("/films/popular")
@@ -38,7 +38,7 @@ public class FilmController {
 
     @PostMapping("/films")
     public Film addFilm(@Valid @RequestBody Film film) {
-        Film filmAdd = filmService.filmStorage.addFilm(film);
+        Film filmAdd = filmService.addFilm(film);
         log.info("Сохраненный фильм: {}", film);
 
         return filmAdd;
@@ -46,34 +46,29 @@ public class FilmController {
 
     @PutMapping("/films")
     public Film updateFilm(@Valid @RequestBody Film film) {
-        Film filmUpdate = filmService.filmStorage.updateFilm(film);
+        Film filmUpdate = filmService.updateFilm(film);
         log.info("Данные обновлены: {}", film);
 
         return filmUpdate;
     }
 
     @PutMapping("/films/{id}/like/{userId}")
-    public Film addLike(@PathVariable int id, @PathVariable int userId) {
-        Film likeAdd = filmService.addLike(id, userId);
-        log.info("Лайк добавлен: {}", likeAdd);
+    public void addLike(@PathVariable int id, @PathVariable int userId) {
+        filmService.addLike(id, userId);
+        log.info("Лайк добавлен: {}", id);
 
-        return likeAdd;
     }
 
     @DeleteMapping("/films/{id}")
-    public Film removeFilm(@PathVariable int id) {
-        Film filmDelete = filmService.filmStorage.removeFilm(id);
-        log.info("Фильм удалён: {}", filmDelete);
-
-        return filmDelete;
+    public void removeFilm(@PathVariable int id) {
+        filmService.removeFilm(id);
+        log.info("Фильм с Id {} удален", id);
     }
 
     @DeleteMapping("/films/{id}/like/{userId}")
-    public Film removeLike(@PathVariable int id, @PathVariable int userId) {
-        Film likeRemove = filmService.removeLike(id, userId);
-        log.info("Лайк удален: {}", likeRemove);
-
-        return likeRemove;
+    public void removeLike(@PathVariable int id, @PathVariable int userId) {
+        filmService.removeLike(id, userId);
+        log.info("Лайк удален: {}", id);
     }
 
 }
