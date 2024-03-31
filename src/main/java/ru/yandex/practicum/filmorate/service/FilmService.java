@@ -10,6 +10,7 @@ import ru.yandex.practicum.filmorate.storage.GenreStorage;
 import ru.yandex.practicum.filmorate.storage.LikesStorage;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -30,9 +31,15 @@ public class FilmService {
 
     }
 
+    public Collection<Film> getFilms() {
+        return filmStorage.getFilms();
+    }
+
     public Film addFilm(Film film) {
-        if (film.getName().isBlank() || film.getDescription().length() > 200 || film.getDuration() <= 0
-                || film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28)) ||
+        if (film.getName().isBlank() ||
+                film.getDescription().length() > 200 ||
+                film.getDuration() <= 0 ||
+                film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28)) ||
                 film.getMpa().getId() > 5) {
             throw new ValidationException("Неправильно введены данные");
         }
@@ -45,8 +52,10 @@ public class FilmService {
             throw new FilmNotFoundException("Фильм не найден");
         }
 
-        if (film.getName().isBlank() || film.getDescription().length() > 200 || film.getDuration() <= 0
-                || film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28)) ||
+        if (film.getName().isBlank() ||
+                film.getDescription().length() > 200 ||
+                film.getDuration() <= 0 ||
+                film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28)) ||
                 film.getMpa().getId() > 5) {
             throw new ValidationException("Неправильно введены данные");
         }

@@ -23,7 +23,7 @@ public class FilmController {
 
     @GetMapping("/films")
     public Collection<Film> getFilms() {
-        return filmService.filmStorage.getFilms();
+        return filmService.getFilms();
     }
 
     @GetMapping("/films/{id}")

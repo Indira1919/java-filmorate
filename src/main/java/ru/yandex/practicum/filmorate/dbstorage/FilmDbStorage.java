@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.dao;
+package ru.yandex.practicum.filmorate.dbstorage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -127,11 +127,16 @@ public class FilmDbStorage implements FilmStorage {
 
     @Override
     public void addGenre(int filmId, int genreId) {
-        if (!(genreStorage.getGenres().contains(genreStorage.getGenre(genreId)))) {
-            throw new ValidationException("Неправильно введены данные");
+        for (Genre genre : genreStorage.getGenres()) {
+            if (genre.getId() == genreId) {
+                String sql = "insert into film_genres(film_id, genre_id) values (?, ?)";
+                jdbcTemplate.update(sql, filmId, genreId);
+
+                return;
+            }
         }
-        String sql = "insert into film_genres(film_id, genre_id) values (?, ?)";
-        jdbcTemplate.update(sql, filmId, genreId);
+
+        throw new ValidationException("Неправильно введены данные");
     }
 
     @Override

@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping("/users")
     public Collection<User> getUsers() {
-        return userService.userStorage.getUsers();
+        return userService.getUsers();
     }
 
     @GetMapping("/users/{id}")

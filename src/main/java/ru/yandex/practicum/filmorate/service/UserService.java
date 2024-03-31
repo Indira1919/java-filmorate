@@ -9,6 +9,7 @@ import ru.yandex.practicum.filmorate.storage.FriendsStorage;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -26,9 +27,16 @@ public class UserService {
 
     }
 
+    public Collection<User> getUsers() {
+        return userStorage.getUsers();
+    }
+
     public User addUser(User user) {
-        if (user.getEmail().isBlank() || !(user.getEmail().contains("@")) || user.getLogin().contains(" ") ||
-                user.getLogin().isBlank() || user.getBirthday().isAfter(LocalDate.now())) {
+        if (user.getEmail().isBlank() ||
+                !(user.getEmail().contains("@")) ||
+                user.getLogin().contains(" ") ||
+                user.getLogin().isBlank() ||
+                user.getBirthday().isAfter(LocalDate.now())) {
             throw new ValidationException("Неправильный формат данных");
         }
 
@@ -44,8 +52,11 @@ public class UserService {
             throw new UserNotFoundException("Пользователь не найден");
         }
 
-        if (user.getEmail().isBlank() || !(user.getEmail().contains("@")) || user.getLogin().contains(" ") ||
-                user.getLogin().isBlank() || user.getBirthday().isAfter(LocalDate.now())) {
+        if (user.getEmail().isBlank() ||
+                !(user.getEmail().contains("@")) ||
+                user.getLogin().contains(" ") ||
+                user.getLogin().isBlank() ||
+                user.getBirthday().isAfter(LocalDate.now())) {
             throw new ValidationException("Неправильный формат данных");
         }
 

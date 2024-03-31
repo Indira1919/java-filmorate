@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.dao;
+package ru.yandex.practicum.filmorate.dbstorage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,12 +8,12 @@ import ru.yandex.practicum.filmorate.storage.LikesStorage;
 
 
 @Component
-public class LikesDao implements LikesStorage {
+public class LikesDbStorage implements LikesStorage {
 
     private final JdbcTemplate jdbcTemplate;
-    private final Logger log = LoggerFactory.getLogger(LikesDao.class);
+    private final Logger log = LoggerFactory.getLogger(LikesDbStorage.class);
 
-    public LikesDao(JdbcTemplate jdbcTemplate) {
+    public LikesDbStorage(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
