@@ -5,15 +5,15 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.service.UserService;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class InMemoryUserStorageTest {
-    InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
+public class UserServiceTest {
+    UserService userService = new UserService();
 
     @ParameterizedTest
     @MethodSource("provideArgsForAddUser")
@@ -23,7 +23,7 @@ public class InMemoryUserStorageTest {
         user.setLogin(login);
         user.setBirthday(birthday);
 
-        assertThrows(ValidationException.class, () -> inMemoryUserStorage.addUser(user));
+        assertThrows(ValidationException.class, () -> userService.addUser(user));
     }
 
     private static Stream<Arguments> provideArgsForAddUser() {
